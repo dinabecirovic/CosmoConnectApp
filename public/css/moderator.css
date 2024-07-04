@@ -1,0 +1,244 @@
+.mt-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(30, 0, 84);
+    width: 50%;
+    height: 420px;
+    border-radius: 10px;
+}
+
+#addTopics {
+    display: none;
+}
+  .main-topics {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .message {
+    color: white;
+  }
+  
+  .main-topics input {
+    color: white !important;
+    text-align: center;
+    background-color: rgb(30, 0, 84);
+    border: none;
+    border-bottom: 1px solid white;
+    font-size: 12px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+  }
+  .main-topics textarea {
+    color: white !important;
+    text-align: center;
+    background-color: rgb(30, 0, 84);
+    border: none;
+    border-bottom: 1px solid white;
+    font-size: 12px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+  }
+  
+  .button3 {
+    background-color: rgb(30, 0, 84);
+    color: white;
+    height:50px;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    margin-top: 50px;
+    font-size: 23px;
+    cursor: pointer;
+  }
+
+  .button3 a {
+    color: white;
+    text-decoration: none;
+  }
+.submit-btn {
+    background-color: transparent;
+    border: none;
+  }
+  
+.terms {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 300px;
+    background-color: blueviolet;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+  }
+  
+  .fas {
+    font-size: 40px;
+    transition: 0.3s;
+    color: white;
+    cursor: pointer;
+  }
+  
+  
+  .close-term {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+  }
+  
+  .close-term:hover {
+    font-size: 50px;
+    transform: scale(1.2);
+    
+  }
+  
+  .close-term:hover::after {
+    content: 'Zatvori temu';
+    top: -15px;
+    border-radius: 5px;
+    font-size: 15px;
+    position: absolute;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 18px;
+    width: 100px;
+    font-weight: 100;
+    left: 40px; 
+    background-color: black;
+  }
+  
+  .haris {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.custom-file-upload i {
+    margin-right: 20px;
+}
+
+/* analysisT */
+body {
+  background-color: #10121d;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  padding: 20px;
+}
+
+h1 {
+  color: #F6B17A;
+  text-align: center;
+  margin: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #1d1f27;
+  color: #fff;
+}
+
+th {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #575757;
+}
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #575757;
+}
+
+th {
+  background-color: #2d2f37;
+}
+
+.remove-btn {
+  color: #F6B17A;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.remove-btn:hover {
+  color: #ff0000;
+}
+
+/* TESTS */
+
+#services {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.test-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #2d2d2d;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #10121d;
+  color: #f9f9f9;
+
+}
+
+label {
+  margin-top: 8px;
+  display: block;
+}
+
+/*.form-container {
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  background-color: rgb(30, 0, 84);
+}*/
+.button1 {
+  background-color:  #2d2d2d;
+  color: rgb(255, 255, 255);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}

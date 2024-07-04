@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+/* CREATE */
+.container {
+    max-width: 380px;
+    margin-top: 30px;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#image {
+    display: none; 
+}
+
+.custom-file-upload, #submit-btn {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px; 
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4c72af;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.custom-file-upload:hover, #submit-btn:hover {
+    background-color: #4c45a0;
+}
+
+#selected-image {
+    max-width: 100%;
+    margin-top: 10px;
+    display: none;
+}
+
+#comment {
+    width: 100%;
+    box-sizing: border-box;
+    display: none; 
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#body.message {
+    color: red;
+}
+/* CREATE END */
+/* POSTS */
+#posts-container {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.post {
+    width: 70%;
+    margin: auto;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.post-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.post-username {
+    font-weight: bold;
+}
+
+.post-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.post-actions {
+    text-align: end;
+}
+
+.like-btn, 
+.comment-btn {
+    margin: 0 5px; 
+    padding: 5px; 
+    font-size: 20px; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    transition: transform 0.3s ease;
+}
+
+.like-btn:hover, .comment-btn:hover {
+    transform: scale(1.2);
+}
+
+.like-btn i {
+    color: #6f2828; 
+}
+
+.comment-btn i {
+    color: rgb(107, 118, 149);
+}
+/* POSTS END */
