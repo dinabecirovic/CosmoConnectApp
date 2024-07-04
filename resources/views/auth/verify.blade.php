@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('../../css/register.css') }}">
 </head>
 <body>
-    <div class="login-page" style="margin-top: 50px">
+    <div class="login-page" style="margin-top: 150px">
         <div class="forma">
             <form action="{{ route('verify.code') }}" class="register-form" method="GET" enctype="multipart/form-data">
                 @csrf

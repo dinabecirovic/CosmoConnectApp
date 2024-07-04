@@ -17,7 +17,7 @@ class TopicController extends Controller
             'moderator_name' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+        $t = new Topic();
         $input = $request->all();
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
@@ -26,10 +26,10 @@ class TopicController extends Controller
             $input['image'] = "$profileImage";
         }
 
-        Topic::create($input);
+        $t::create($input);
 
         return redirect('/moderator')
-                        ->with('success', 'Nova vest je postavljena.');
+                        ->with('success', 'Nova tema je postavljena.');
     }
 
     public function CloseT(Request $request)
@@ -46,7 +46,7 @@ class TopicController extends Controller
         $datat = Topic::all();
         //dd($datat);
         $dat = Material::all();
-        return view('auth.moderator', ['topics' => $datat, 'material' => $dat]);
+    return view('auth.moderator', ['topics' => $datat, 'material' => $dat]);
     }
 
     public function destroyT(Topic $topic)

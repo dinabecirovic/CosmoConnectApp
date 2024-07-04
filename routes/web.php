@@ -76,7 +76,7 @@ Route::put('/close_topics/{id}', [TopicController::class, 'CloseT'])->name('clos
 //Route::get('/moderator', [TopicController::class, 'showTopics']);
 Route::get('/moderator', [TopicController::class, 'showTopics'])->name('moderator');
 Route::get('/topics', [TopicController::class, 'showTopics'])->name('topics');
-Route::get('/my_topics', [UserController::class, 'showTs'])->name('my_topics');
+Route::get('/my_topics', [UserController::class, 'myTopics'])->name('my_topics');
 Route::get('/testsU', [UserController::class, 'TestsU'])->name('testsU');
 
 
@@ -154,7 +154,8 @@ Route::get('/moderator', [TopicController::class, 'showTopics'])->name('moderato
 
 
 
-
+Route::post('/follow/{moderatorId}', [UserController::class, 'follow'])->name('follow');
+//Route::get('/my_topics', [UserController::class, 'showFollowedTopics'])->name('my_topics');
 
 
 

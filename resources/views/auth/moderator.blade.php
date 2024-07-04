@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="sr">
 <head>
@@ -30,86 +33,65 @@
   </div>
   <!-- HEADER END -->
 
-  <!-- SECTION -->
-  <section id="topics">
+<!-- SECTION -->
+<section id="topics">
     <div style="text-align: center;">
-      <button class="button button3"><a href="/analysisT">Polaznici</a></button>
+        <button class="button button3"><a href="/analysisT">Polaznici</a></button>
     </div>
-    <div id="ctn" style="text-align: center;">
-      <button class="button button3" onclick="myFunction3()">+ Dodaj novu temu</button>
+    <div style="text-align: center;">
+        <button class="button button3" onclick="myFunction3()">+ Dodaj novu temu</button>
     </div>
-    <div id="addTopics" style="display: none;">
-      <div class="main-topics">
-        <form action="/storeTs" method="post" class="mt-1" enctype="multipart/form-data">
-          @csrf
-          
-          <input type="text" name="topic_title" id="topic_title" placeholder="Naslov teme">
-          <p class="message">@error('topic_title'){{ "Unesite naslov teme" }}@enderror</p>
-
-          <textarea id="topic" name="topic" placeholder="Detaljnije o temi"></textarea>
-          <p class="message">@error('topic'){{ "Unesite temu" }}@enderror</p>
-
-          <input type="hidden" name="IdP" id="IdP" value="{{ Session::get('login_id') }}">
-          <input type="hidden" name="moderator_name" id="moderator_name" value="{{ Auth::check() ? Auth::user()->name : '' }}">
-          <input type="hidden" name="activnost" id="activnost" value="otvoren">
-
-          <div class="image-upload">
-            <label for="image" id="upload-label" class="custom-file-upload">+ Dodaj fotografiju</label>
-            <input type="file" name="image" id="image" accept="image/*" style="display: none;" onchange="previewImage(event)">
-            <img id="selected-image" src="#" style="display: none; width:18rem">
-            <p class="message">@error('image'){{ "Unesite naslovnu fotografiju" }}@enderror</p>
-          </div>
-          <button type="submit" class="submit-btn"><i style="font-size: 40px; color: white;" class="fas fa-share-square"></i></button>
-        </form>
-      </div>
+    <div id="addTopics">
+        <div class="main-topics">
+            <form action="/storeTs" method="post" class="mt-1" enctype="multipart/form-data" onsubmit="displayTopic(event)">
+                @csrf
+                <input type="text" name="topic_title" id="topic_title" placeholder="Naslov Teme">
+                <p class="message">@error('topic_title'){{ "Unesi naslov teme." }}@enderror</p>
+                <input type="text" name="topic" id="topic" placeholder="Tema:">
+                <p class="message">@error('topic'){{ "Unesite temu." }}@enderror</p>
+                <input type="hidden" name="IdP" id="IdP" value="{{ Session::get('login_id') }}">
+                <input type="text" name="moderator_name" id="moderator_name" placeholder="Ime">
+                <p class="message">@error('moderator_name'){{ "Unesite ime." }}@enderror</p>
+                <input type="hidden" name="activnost" id="activnost" value="otvoren">
+                <div class="image-upload">
+                    <label for="image" class="custom-file-upload">+ Kreiraj naslovnu fotografiju</label>
+                    <input type="file" name="image" id="image" accept="image/*" style="display: none;" onchange="previewImage(event)">
+                    <img id="selected-image" src="#" alt="Selected Image" style="display: none;"/>
+                    <p class="message">@error('image'){{ "Unesite naslovnu fotografiju" }}@enderror</p>
+                </div>
+                <button type="submit" class="submit-btn"><i style="font-size: 40px; color: white;" class="fas fa-share-square"></i></button>
+            </form>
+        </div>
     </div>
-    <div class="haris">
-      <div class="terms">
+    <div id="displayArea" class="haris">
         <button type="submit" class="close-term"><i style="font-size: 30px;" class="fas fa-times fa-flip-both fa-lg" style="color: #ffffff;"></i></button>
         <div>
-          <h1>Dostupne teme</h1>
+            <h1>Dostupne teme</h1>
         </div>
-        <div id="mtemes">
-          @foreach ($topics as $t)
-            @if($t->activity === 'open' && Session::get('login_id') == $t->IdP)
-              <div>
-                <p>{{ $t->topic_name }}</p>
-                <p class="price1">Tema je trenutno {{ $t->activity }}</p>
-                <p>{{ $t->topic }}</p>
-                <div>
-                  <form action="{{ route('close_topics', $t->id) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                  </form>
+        <div class="terms">
+            <div id="mtemes">
+                @foreach ($topics as $t)
+                @if($t->activity === 'open' && Session::get('login_id') == $t->IdP)
+                <div class="topic-entry">
+                    <p>{{ $t->topic_name }}</p>
+                    <p class="price1">Tema je trenutno {{ $t->activity }}</p> 
+                    <p>{{ $t->topic }}</p>
+                    <div>
+                        <form action="{{ route('close_topics', $t->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit">Zatvori temu</button>
+                        </form>
+                    </div>
                 </div>
-              </div>
-            @endif
-          @endforeach
-
-          @foreach ($topics as $t)
-            @if ($t->activity === 'close' && Session::get('login_id') == $t->IdP)
-              <div>
-                <img src="/images/{{ $t->image }}">
-                <p class="price">{{ $t->name }}</p>
-                <p class="price1">Tema je trenutno {{ $t->activity }}</p>
-                <p>{{ $t->topic }}</p>
-                <div>
-                  <div>
-                    <form action="{{ route('destroyT', $t->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit">Izbriši vest</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            @endif
-          @endforeach
+                @endif
+                @endforeach
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  <!-- SECTION END -->
+</section>
+
+<!-- SECTION END-->
 
   <!-- FOOTER -->
   <div class="footer">
@@ -162,19 +144,114 @@
         } else {
             x.style.display = "none";
         }
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+    loadTopics();
+});
+
+function previewImage(event) {
+    const input = event.target;
+    const reader = new FileReader();
+    reader.onload = function() {
+        const dataURL = reader.result;
+        const output = document.getElementById('selected-image');
+        output.src = dataURL;
+        output.style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+}
+
+function displayTopic(event) {
+    event.preventDefault(); // Sprečava slanje forme
+
+    // Prikupljanje podataka iz forme
+    const topicTitle = document.getElementById('topic_title').value;
+    const topic = document.getElementById('topic').value;
+    const moderatorName = document.getElementById('moderator_name').value;
+    const imageInput = document.getElementById('image');
+    const image = imageInput.files[0];
+
+    if (!image) {
+        alert('Molimo odaberite fotografiju.');
+        return;
     }
 
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('selected-image');
-            output.src = reader.result;
-            output.style.display = 'block';
-        }
-        reader.readAsDataURL(event.target.files[0]);
-        document.getElementById('upload-label').style.display = 'none';
-    }
-  </script>
+    const reader = new FileReader();
+    reader.onload = function() {
+        const dataURL = reader.result;
+        const topicData = {
+            title: topicTitle,
+            topic: topic,
+            moderator: moderatorName,
+            image: dataURL
+        };
+        saveTopic(topicData);
+        appendTopic(topicData);
+    };
+    reader.readAsDataURL(image);
+
+    // Resetovanje forme nakon dodavanja
+    event.target.reset();
+    document.getElementById('selected-image').style.display = 'none';
+}
+
+function saveTopic(topicData) {
+    let topics = JSON.parse(localStorage.getItem('topics')) || [];
+    topics.push(topicData);
+    localStorage.setItem('topics', JSON.stringify(topics));
+}
+
+function loadTopics() {
+    const topics = JSON.parse(localStorage.getItem('topics')) || [];
+    topics.forEach(topic => appendTopic(topic));
+}
+
+function appendTopic(topicData) {
+    const displayArea = document.getElementById('mtemes');
+    const newTopicDiv = document.createElement('div');
+    newTopicDiv.classList.add('topic-entry');
+    
+    newTopicDiv.innerHTML = `
+        <h3>${topicData.title}</h3>
+        <p>Tema: ${topicData.topic}</p>
+        <p>Moderator: ${topicData.moderator}</p>
+        <img src="${topicData.image}" alt="Topic Image" style="max-width: 400px; max-height: 400px;"/>
+        <button type="button" onclick="removeTopic(this)">Zatvori temu</button>
+    `;
+    displayArea.appendChild(newTopicDiv);
+}
+
+function removeTopic(button) {
+    const topicDiv = button.closest('.topic-entry');
+    const title = topicDiv.querySelector('h3').innerText;
+    let topics = JSON.parse(localStorage.getItem('topics')) || [];
+    topics = topics.filter(topic => topic.title !== title);
+    localStorage.setItem('topics', JSON.stringify(topics));
+    topicDiv.remove();
+
+
+}
+
+</script>
 
 </body>
 </html>
+
+         <!-- @foreach ($topics as $t)
+            @if ($t->activity === 'close' && Session::get('login_id') == $t->IdP)
+              <div>
+                <img src="/images/{{ $t->image }}">
+                <p class="price">{{ $t->name }}</p>
+                <p class="price1">Tema je trenutno {{ $t->activity }}</p>
+                <p>{{ $t->topic }}</p>
+                <div>
+                  <form action="{{ route('destroyT', $t->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Izbriši temu</button>
+                  </form>
+                </div>
+              </div>
+            @endif
+          @endforeach
+-->

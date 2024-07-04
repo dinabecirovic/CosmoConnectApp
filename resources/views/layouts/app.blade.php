@@ -36,6 +36,7 @@
 
     </div>
     @yield('content')
+    <!--
     <div class="footer">
         <div class="footer-container">
             <div class="col-3">
@@ -76,6 +77,6 @@
             </div>
         </div>
     </div>
-    
+-->
 </body>
 </html>

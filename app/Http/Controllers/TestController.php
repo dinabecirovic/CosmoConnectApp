@@ -24,11 +24,11 @@ class TestController extends Controller
     }
       public function showTest()
     { 
-      $topics=Topic::all();
-      $tests=Test::with('topics')->get();
+      $topicsU=Topic::all();
+      $tests=Test::all();
       $result=Result::all();
       $questions=Question::all();
-      return view('auth.tests',compact('topics','tests','result','questions'));
+      return view('auth.tests',compact('topicsU','tests','result','questions'));
     }
 
     public function destroyTest(Test $test)

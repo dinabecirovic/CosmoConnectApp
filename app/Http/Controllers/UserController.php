@@ -11,6 +11,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Psy\Readline\Hoa\Console;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Follow;
 use App\Models\Result;
 
 class UserController extends Controller
@@ -39,7 +40,8 @@ class UserController extends Controller
     }
 
     public function myTopics(){
-        return view('auth.my_topics');
+        $topics = Topic::all(); // Korišćenje :: umesto -> i ispravno pozivanje modela Topic
+        return view('auth.my_topics')->with('topics', $topics);
     }
 
     public function showTs()
@@ -49,7 +51,8 @@ class UserController extends Controller
         $join=Enrolled::select('topic_id')->where('user_id', '=', $user_id)->get()->toArray();
         $datat=Topic::where([['activity', '=', $por]])->whereIn('id',$join)->get();
         $dm=Material::all();
-        return view('auth.my_topics',['topics'=>$datat],['material'=>$dm]);
+        $datat2 = Topic::all();
+        return view('auth.my_topics')->with(['topics'=>$datat2,'material'=>$dm]);
     }
 
     public function download(Request $request,$file){
@@ -107,4 +110,25 @@ class UserController extends Controller
         return view('analysis',['results'=>$result_info]);
     }
 
+    public function follow($moderatorId)
+    {
+        $userId = Session::get('login_id');
+        $follow = Follow::create(['user_id' => $userId, 'moderator_id' => $moderatorId]);
+
+        if ($follow) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
+    }
+
+    public function showFollowedTopics()
+    {
+        $userId = session()->get('login_id');
+        $followedModerators = Follow::where('user_id', $userId)->pluck('moderator_id');
+        $topics = Topic::whereIn('user_id', $followedModerators)->get();
+        $materials = Material::all();
+
+        return view('auth.my_topics', ['topics' => $topics, 'material' => $materials]);
+    }
 }

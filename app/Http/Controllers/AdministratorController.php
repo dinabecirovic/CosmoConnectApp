@@ -13,7 +13,8 @@ class AdministratorController extends Controller
 {
     public function index()
     {
-        return view('auth.administrator');
+        $news = News::all();
+        return view('auth.administrator', compact('news'));
     }
 
     public function show()
@@ -56,6 +57,7 @@ class AdministratorController extends Controller
             'title' => 'required',
             'details' => 'required'
         ]);
+        
 
         News::create($request->all());
 

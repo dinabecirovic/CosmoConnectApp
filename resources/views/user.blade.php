@@ -31,6 +31,9 @@
             <li>
                 <a href="/analysis">Ankete</a>
             </li>
+            <li>
+                <a href="/administrator_news">Vesti</a>
+            </li>
         </ul>
 
         <ul>
@@ -66,6 +69,7 @@
       @endforeach
     </section>
     <!-- TOPIC SECTION END -->
+     
 
     <!-- FOOTER -->
     <div class="footer">

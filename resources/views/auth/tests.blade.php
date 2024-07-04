@@ -42,7 +42,7 @@
                     @csrf
                     <label for="tid">Izaberi temu:</label>
                     <select name="tid" id="tid">
-                        @foreach ($topics as $topic)
+                        @foreach ($topicsU as $topic)
                             @if($topic->activity === 'open' && Session::get('login_id') == $topic->IdP)
                                 <option value="{{$topic->id}}">{{$topic->topic_title}}</option>
                             @endif
@@ -147,6 +147,7 @@
             document.getElementById('addQuestion').hidden = !document.getElementById('addQuestion').hidden;
         }
     </script>
+    
 <!-- SECTION END -->
 
 <!-- FOOTER -->

@@ -7,6 +7,7 @@
     <title>CosmoConnect | Moje teme</title>
     <link rel="stylesheet" href="{{ asset('../../css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('../../css/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('../../css/moderator.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -41,7 +42,9 @@
         <div>
             <h1>Moje teme</h1>
         </div>
-        @foreach ($topics as $t)
+        <h1 style="color:white;">{{$topics->count()}}</h1>
+    
+        @foreach($topics as $t)
             <div id="container">
                 <div class="card">
                     <img src="images/{{ $t->image }}">
@@ -49,21 +52,7 @@
                         <span class="tag"> Moderator: {{ $t->moderator_name }}</span>
                         <div class="name">{{ $t->name }}</div>
                         <p>{{ $t->info }}</p>
-                        <table>
-                            <tr>
-                                <th>Postavljene teme</th>
-                                <th></th>
-                            </tr>
-                            <tr><td></td></tr>
-                            @foreach ($material as $mat)
-                                @if ($mat->topic_id == $t->id)
-                                    <tr>
-                                        <td>{{ $mat->file }}</td>
-                                        <td><button id="myBtn"><a href="{{ url('/download', $mat->file) }}">Sačuvaj</a></button></td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </table>
+                        <button onclick="followModerator({{ $t->moderator_id }})">Zaprati</button>
                     </div>
                 </div>
             </div>
@@ -113,7 +102,25 @@
         </div>
     </div>
     <!-- FOOTER END -->
-    
+    <script>
+    function followModerator(moderatorId) {
+        fetch(`/follow/${moderatorId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                alert('Pratite ovog moderatora.');
+            } else {
+                alert('Došlo je do greške.');
+            }
+        });
+    }
+</script>
     <script src="js/app.js"></script>
     <script src="js/ss.js"></script>
 </body>
