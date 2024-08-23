@@ -28,3 +28,9 @@ RUN composer install --no-dev --optimize-autoloader
 # Postavi odgovarajuće dozvole za Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+RUN chmod -R 755 /var/www/html/public && \
+    chmod -R 755 /var/www/html/storage
+
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
+RUN a2enmod rewrite
