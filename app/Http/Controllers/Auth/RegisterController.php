@@ -57,17 +57,14 @@ class RegisterController extends Controller
             $user->profile_picture = $profileImage;
         }
 
-        // Provera da li korisnik već postoji pre nego što se kreira
         $existingUser = User::where('email', $user->email)->first();
         if ($existingUser) {
             return redirect('register')->withErrors(['email' => 'Korisnik sa ovom email adresom već postoji.']);
         }
 
-        // Store verification email and code in the session
         session(['verification_email' => $user->email]);
         session(['verification_code' => mt_rand(100000, 999999)]);
 
-        // Send verification email
         Mail::to($user->email)->send(new VerificationCodeEmail(session('verification_code')));
         $user->save();
         return redirect('verify')->with('success', 'Proverite e-mail poštu. Poslat Vam je verifikacioni kod. Vaše korisničko ime je: ' . $username);
@@ -84,18 +81,14 @@ class RegisterController extends Controller
         $verification_email = session('verification_email');
     
         if ($input_code == $saved_code) {
-            // Dohvatite korisnika na osnovu email adrese
             $user = User::where('email', $verification_email)->first();
     
             if ($user) {
-                // Postavite status korisnika na 'approved' jer je verifikacija uspešna
                 $user->status = 'approved';
                 $user->save();
     
-                // Očistite sesijske promenljive
                 session()->forget(['verification_code', 'verification_email']);
     
-                // Preusmeravanje na stranicu za prijavu s porukom o uspehu i korisničkim imenom
                 return redirect()->route('login')->with([
                     'success' => 'Uspešno ste verifikovani i registrovani. Sada se možete prijaviti.',
                     'username' => $user->username,

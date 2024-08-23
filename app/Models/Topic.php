@@ -16,4 +16,9 @@ class Topic extends Model
         'activity',
         'IdP'
     ];
+
+    public function polls()
+    {
+        return $this->hasMany(Poll::class);
+    }
 }

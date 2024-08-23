@@ -10,10 +10,10 @@ class LogoutController extends Controller
     public function store()
     {
         if(session()->has('login_id')){
-            session()->forget('login_id'); // Možete koristiti 'pull' ili 'forget' metodu za uklanjanje sesije
-            return redirect()->route('login'); // Redirekcija na stranicu za prijavu
+            session()->forget('login_id'); 
+            return redirect()->route('login'); 
         } else {
-            return redirect()->route('login'); // U slučaju da korisnik nije prijavljen, takođe ga preusmerite na stranicu za prijavu
+            return redirect()->route('login'); 
         }
     }
 }

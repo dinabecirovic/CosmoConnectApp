@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Follow extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'moderator_id'];
+    protected $fillable = ['user_id', 'topic_id'];
 }

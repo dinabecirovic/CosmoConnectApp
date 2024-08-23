@@ -7,7 +7,7 @@
 
 .container{
     width: 100%;
-    height: 90vh;
+    height: 85vh;
     background-color: rgba(0,0,0,0.4);
     display: flex;
     align-items: center;
@@ -86,4 +86,13 @@
         width: auto;
         height: 100%;
     }
+}
+
+
+
+.mulish {
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
 }

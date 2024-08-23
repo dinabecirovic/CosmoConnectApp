@@ -1,127 +1,42 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <title>CosmoConnect | Moje teme</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmoConnect | Teme</title>
+    <link rel="stylesheet" href="{{ asset('css/astro_info.css') }}">
     <link rel="stylesheet" href="{{ asset('../../css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('../../css/user.css') }}">
     <link rel="stylesheet" href="{{ asset('../../css/moderator.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <script src="{{ asset('../../js/moderator.js') }}" defer></script>
 </head>
 <body>
-    <!-- HEADER -->
-    <div class="hamburger-menu">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
-    <div class="nav-bar">
-        <ul>
-            <li>
-                <a href="{{ route('home') }}">Početna</a>
-            </li>
-            <li>
-                <a href="/testsU">Testovi</a>
-            </li>
-            <li>
-                <a href="/analysis">Ankete</a>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <a href="{{ route('logout') }}">Odjavi se</a>
-            </li>
-        </ul>
-    </div>
-    <!-- HEADER END -->
-
-    <!-- TOPIC SECTION -->
-    <section id="topics">
-        <div>
-            <h1>Moje teme</h1>
-        </div>
-        <h1 style="color:white;">{{$topics->count()}}</h1>
-    
-        @foreach($topics as $t)
-            <div id="container">
-                <div class="card">
-                    <img src="images/{{ $t->image }}">
-                    <div>
-                        <span class="tag"> Moderator: {{ $t->moderator_name }}</span>
-                        <div class="name">{{ $t->name }}</div>
-                        <p>{{ $t->info }}</p>
-                        <button onclick="followModerator({{ $t->moderator_id }})">Zaprati</button>
+    <div class="container">
+        <section id="topics">
+            @foreach($notFollowedTopics as $t)
+                <div id="displayArea" class="haris">
+                    <div class="topic-entry">
+                        <p>{{ $t->topic_title }}</p>
+                        <p>{{ $t->topic }}</p>
+                        <img src="/images/{{ $t->image }}" alt="{{ $t->topic_title }}" class="topic-image">
+                        <form action="{{ route('follow') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="topic_id" value="{{ $t->id }}">
+                            <div class="tooltip">
+                                <button type="submit" class="follow">
+                                    <i class="far fa-plus-square"></i>
+                                </button>
+                                <span class="tooltiptext">Zaprati temu</span>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        @endforeach
-    </section>
-    <!-- TOPIC SECTION END -->
-
-    <!-- FOOTER -->
-    <div class="footer">
-        <div class="footer-container">
-            <div class="col-3">
-                <h3>O NAMA</h3>
-                <hr>
-                <p>CosmoConnect je vertikalna socijalna mreža namenjena ljubiteljima astronomije. Platforma je osmišljena sa ciljem da korisnicima pruži mogućnost da istražuju i dele svoje iskustvo sa drugima. Korisnici mogu postavljati svoje najnovije astrofotografije s opisima zapažanja i povezati se sa drugim entuzijastima putem komentara, lajkova i deljenja u okviru zajednice.</p>
-            </div>
-            <div class="col-3">
-                <h3>NAVIGACIJA</h3>
-                <hr>
-                <ul>
-                    <li><a href="{{ route('home') }}">Početna</a></li>
-                    <li><a href="{{ route('astro_info') }}">AstroInfo</a></li>
-                    <li><a href="{{ route('posts') }}">Objave</a></li>
-                    <li><a href="{{ route('register') }}">Registrujte se</a></li>
-                </ul>
-            </div>
-            <div class="col-3">
-                <h3>ASTROINFO</h3>
-                <hr>
-                <ul>
-                    <li><a href="{{ route('milky_way') }}">Mlečni put</a></li>
-                    <li><a href="{{ route('stars') }}">Zvezde</a></li>
-                    <li><a href="{{ route('planets') }}">Planete</a></li>
-                </ul>
-            </div>
-            <div class="col-3">
-                <h3>PRATITE NAS</h3>
-                <hr>
-                <div class="social-icon">
-                    <ul>
-                        <li><a href="#"><i class="far fa-envelope"></i></a></li>
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            @endforeach
+        </section>
     </div>
-    <!-- FOOTER END -->
-    <script>
-    function followModerator(moderatorId) {
-        fetch(`/follow/${moderatorId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.success) {
-                alert('Pratite ovog moderatora.');
-            } else {
-                alert('Došlo je do greške.');
-            }
-        });
-    }
-</script>
-    <script src="js/app.js"></script>
-    <script src="js/ss.js"></script>
 </body>
 </html>
+@endsection

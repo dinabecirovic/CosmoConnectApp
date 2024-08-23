@@ -26,17 +26,50 @@
         </ul>
 
         <ul>
+                @if(!Auth::user())
                 <li>
                     <a href="{{ route('login') }}">Prijavi se</a>
                 </li>
                 <li>
                     <a href="{{ route('register') }}" class="p-3">Registruj se</a>
                 </li>
+                @endif
+                
+                
+                @if(Auth::user() && Auth::user()->type=='user')
+                <li>
+                    <a href="{{ route('my_topics') }}">Teme</a>
+                </li>
+                <li>
+                    <a href="{{ route('my_topics2') }}">Moje teme</a>
+                </li>
+                <li>
+                    <a href="{{ route('administrator_news') }}">Novosti</a>
+                </li>
+                @endif
+                @if(Auth::user() && Auth::user()->type=='administrator')
+                <li>
+                    <a href="{{ route('administrator') }}">Korisnici</a>
+                    <a href="{{ route('administrator_news') }}">Novosti</a>
+                </li>
+                @endif
+                @if(Auth::user() && Auth::user()->type=='moderator')
+                <li>
+                    <a href="{{ route('moderator') }}">Teme</a>
+                </li>
+                <li>
+                    <a href="{{ route('administrator_news') }}">Novosti</a>
+                </li>
+                @endif
+                @if(Auth::user())
+                <li>
+                    <a href="{{ route('logout') }}" class="p-3">Odjavi se</a>
+                </li>
+                @endif
         </ul>
 
     </div>
     @yield('content')
-    <!--
     <div class="footer">
         <div class="footer-container">
             <div class="col-3">
@@ -50,7 +83,6 @@
                 <ul>
                     <li><a href="{{ route('home') }}">Početna</a></li>
                     <li><a href="{{ route('astro_info') }}">AstroInfo</a></li>
-                    <li><a href="{{ route('posts') }}">Objave</a></li>
                     <li><a href="{{ route('register') }}">Registrujte se</a></li>
                 </ul>
             </div>
@@ -77,6 +109,5 @@
             </div>
         </div>
     </div>
--->
 </body>
 </html>

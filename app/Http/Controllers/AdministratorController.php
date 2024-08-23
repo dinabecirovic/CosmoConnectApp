@@ -61,6 +61,6 @@ class AdministratorController extends Controller
 
         News::create($request->all());
 
-        return redirect('administrator_news')->with('success', 'Nova vest je uspešno dodata.');
+        return redirect('administrator_news')->with('success');
     }
 }

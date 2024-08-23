@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,35 +13,6 @@
     
 </head>
 <body>
-    <!-- HEADER -->
-    <div class="hamburger">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
-    <div class="nav-bar">
-        <ul>
-            <li>
-                <a href="{{ route('home') }}">Početna</a>
-            </li>
-            <li>
-                <a href="{{ route('astro_info') }}">AstroInfo</a>
-            </li>
-            <li>
-                <a href="/milky_way" class="active">Mlečni put</a>
-            </li>
-        </ul>
-
-        <ul>
-            <li>
-                <a href="{{ route('login') }}">Prijavi se</a>
-            </li>
-            <li>
-                <a href="{{ route('register') }}" class="p-3">Registruj se</a>
-            </li>
-        </ul>
-    </div>
-    <!-- HEADER END -->
     <!-- SECTION -->
     <div class="m-w" style="margin-top: 30px; margin-bottom: 20px">
             <p>Mlečni put je velika spiralna galaksija koja uključuje Sunčev sistem, Zemlju i sve druge objekte koji orbitiraju oko Sunca. Ova galaksija ima prečnik od oko 100.000 svetlosnih godina i sastoji se od milijardi zvezda, gasa, prašine i tamne materije.
@@ -59,47 +33,6 @@
         </div>
     </div> 
     <!-- SECTION END -->
-    <!-- FOOTER -->
-    <div class="footer">
-        <div class="footer-container">
-            <div class="col-3">
-                <h3>O NAMA</h3>
-                <hr>
-                <p>CosmoConnect je vertikalna socijalna mreža namenjena ljubiteljima astronomije. Platforma je osmišljena sa ciljem da korisnicima pruži mogućnost da istražuju i dele svoje iskustvo sa drugima. Korisnici mogu postavljati svoje najnovije astrofotografije s opisima zapažanja i povezati se sa drugim entuzijastima putem komentara, lajkova i deljenja u okviru zajednice.</p>
-            </div>
-            <div class="col-3">
-                <h3>NAVIGACIJA</h3>
-                <hr>
-                <ul>
-                    <li><a href="{{ route('home') }}">Početna</a></li>
-                    <li><a href="{{ route('astro_info') }}">AstroInfo</a></li>
-                    <li><a href="{{ route('posts') }}">Objave</a></li>
-                    <li><a href="{{ route('register') }}">Registrujte se</a></li>
-                </ul>
-            </div>
-            <div class="col-3">
-                <h3>ASTROINFO</h3>
-                <hr>
-                <ul>
-                    <li><a href="{{ route('milky_way') }}">Mlečni put</a></li>
-                    <li><a href="{{ route('stars') }}">Zvezde</a></li>
-                    <li><a href="{{ route('planets') }}">Planete</a></li>
-                </ul>
-            </div>
-            <div class="col-3">
-                <h3>PRATITE NAS</h3>
-                <hr>
-                <div class="social-icon">
-                    <ul>
-                        <li><a href="#"><i class="far fa-envelope"></i></a></li>
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FOOTER END -->
 </body>
 </html>
+@endsection

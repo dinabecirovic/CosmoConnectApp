@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +9,12 @@
     <title>CosmoConnect|Prijava</title>
     <link rel="stylesheet" href="{{ asset('../../css/login.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <script src="{{ asset('../../js/dom.js') }}" defer></script>
+    <script src="{{ asset('../../js/login.js') }}" defer></script>
 </head>
 <body>
     <div class="login-page" style="margin-top: 150px">
         <div class="forma">
-            <form action="{{ route('login') }}" class="register-form" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('loginuser') }}" class="register-form" method="post" enctype="multipart/form-data">
                 @if (Session::has('success'))
                     <div class="message">{{ Session::get('success') }}</div>
                 @endif
@@ -70,42 +70,10 @@
                     Prijavite se
                 </button> 
             </form>
-            <a href="{{ route('password.email') }}" style="color: #ccc; font-size: 10px;">Zaboravili ste lozinku?</a>
         </div>
     </div>
 </body>
 <script src="js/app.js"></script>
-<script>
-    const username = document.getElementById('username');
-    const username_error = document.getElementById('username_error');
-
-    const password = document.getElementById('password-input');
-    const password_error = document.getElementById('password_error');
-
-    const username_pattern = /^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
-
-    const handle_submit = e => {
-        let valid = true;
-
-        if(username_pattern.test(username.value)) {
-            username_error.hidden = true;
-        } else {
-            username_error.hidden = false;
-            valid = false;
-        }
-
-        if(password.value.length >= 8) {
-            password_error.hidden = true;
-        } else {
-            password_error.hidden = false;
-            valid = false;
-        }
-
-        if(!valid) {
-            e.preventDefault();
-        }
-    }
-</script>
 </html>
 
 @endsection
