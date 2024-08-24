@@ -1,44 +1,19 @@
-# Koristi PHP 8.1 sa Apache serverom
-FROM php:8.1-apache
+# Dockerfile
+# Use base image for container
+FROM richarvey/nginx-php-fpm:3.1.6
 
-# Postavi radni direktorijum
-WORKDIR /var/www/html
+# Copy all application code into your Docker container
+COPY . .
 
-# Instaliraj zavisnosti
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql gd zip
+RUN apk update
 
-# Instaliraj Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install the npm package
+RUN apk add --no-cache npm
 
-# Kopiraj sve iz trenutnog direktorijuma u radni direktorijum
-COPY . /var/www/html
+# Install NPM dependencies
+RUN npm install
 
-# Instaliraj PHP zavisnosti
-RUN composer install --no-dev --optimize-autoloader
+# Build Vite assets
+RUN npm run build
 
-# Postavi odgovarajuće dozvole za Laravel
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-RUN chmod -R 755 /var/www/html/public && \
-    chmod -R 755 /var/www/html/storage
-
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-
-RUN a2enmod rewrite
-
-# Expose port 80
-EXPOSE 80
-
-RUN sed -i 's/Listen 80/Listen 0.0.0.0:80/' /etc/apache2/ports.conf
-
-# Start Apache server
-CMD ["apache2-foreground"]
+CMD ["/start.sh"]
