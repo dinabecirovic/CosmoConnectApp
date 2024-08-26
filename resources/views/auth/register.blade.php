@@ -22,7 +22,6 @@
                         style="width: 100%; margin-bottom:20px; margin-top:20px; background-color: transparent; color: gray; height: 25px">
                             <option value="user" id="type_user">Korisnik</option>
                             <option value="moderator" id="type_moderator">Moderator</option>
-                            <option value="administrator" id="type_administrator">Administrator</option>
                         </select>
                     </div>
                     <div>
