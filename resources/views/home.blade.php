@@ -27,14 +27,14 @@
         </div>
     </div>
     <!-- SECTION END -->
-    <!-- COOKIE -->
+    <!-- COOKIE 
         @if (!request()->cookie('accepted_cookies'))
             <div id="cookie-banner">
                 <p>Ovaj sajt koristi kolačiće kako bi poboljšao korisničko iskustvo.</p>
                 <button id="accept-button" onclick="acceptCookies()">Prihvati</button>
             </div>
         @endif
-    <!-- COOKIE END -->
+     COOKIE END -->
 </body>
 </html>
 @endsection

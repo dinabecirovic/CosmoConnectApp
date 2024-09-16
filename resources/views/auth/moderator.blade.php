@@ -50,11 +50,11 @@
 
                     <!-- Reactions -->
                     <div class="reactions">
-                        <button class="reaction-button like-button" data-id="{{ $t->id }}">
+                        <button class="reaction-button like-button" data-id="{{ $t->id }}" onclick="this.disabled = true;">
                             <i class="fas fa-thumbs-up"></i>
                             <span class="like-count" id="like-count-{{ $t->id }}">0</span>
                         </button>
-                        <button class="reaction-button dislike-button" data-id="{{ $t->id }}">
+                        <button class="reaction-button dislike-button" data-id="{{ $t->id }}" onclick="this.disabled = true;">
                             <i class="fas fa-thumbs-down"></i>
                             <span class="dislike-count" id="dislike-count-{{ $t->id }}">0</span>
                         </button>

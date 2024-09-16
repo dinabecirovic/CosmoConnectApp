@@ -94,6 +94,8 @@
                             placeholder="datum rođenja*"
                             name="date_of_birth"
                             value="{{ old('date_of_birth') }}"
+                            max="{{ now()->subYears(13)->format('Y-m-d') }}"
+                            required
                         >
                         <p
                             hidden 

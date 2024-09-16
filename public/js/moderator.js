@@ -1,4 +1,4 @@
-//reactions
+// reactions
 document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelectorAll('.reaction-button').forEach(button => {
         const id = button.getAttribute('data-id');
@@ -11,17 +11,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
         likeCountSpan.textContent = likeCount;
         dislikeCountSpan.textContent = dislikeCount;
         
+        const hasLiked = localStorage.getItem(`liked-${id}`);
+        const hasDisliked = localStorage.getItem(`disliked-${id}`);
+
+        if (hasLiked) {
+            document.querySelector(`.like-button[data-id='${id}']`).disabled = true;
+        }
+        if (hasDisliked) {
+            document.querySelector(`.dislike-button[data-id='${id}']`).disabled = true;
+        }
+
         button.addEventListener('click', () => {
-            if (button.classList.contains('like-button')) {
+            if (button.classList.contains('like-button') && !hasLiked) {
                 likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
                 localStorage.setItem(`like-count-${id}`, likeCountSpan.textContent);
-            } else if (button.classList.contains('dislike-button')) {
+                localStorage.setItem(`liked-${id}`, true); 
+                button.disabled = true; 
+            } else if (button.classList.contains('dislike-button') && !hasDisliked) {
                 dislikeCountSpan.textContent = parseInt(dislikeCountSpan.textContent) + 1;
                 localStorage.setItem(`dislike-count-${id}`, dislikeCountSpan.textContent);
+                localStorage.setItem(`disliked-${id}`, true); 
+                button.disabled = true; 
             }
         });
     });
 });
+
 
 //add topics
 function myFunction3() {
